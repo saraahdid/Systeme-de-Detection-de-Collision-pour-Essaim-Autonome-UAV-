@@ -82,6 +82,9 @@ int main() {
         (essaim + i)->y  = (float)(rand() % 1000000) / 100.0f;
         (essaim + i)->z  = (float)(rand() % 1000000) / 100.0f;
     }
+ // DEBUT CHRONOMETRE : on mesure tri + balayage uniquement //
+    clock_t debut = clock();
+
 
     /* 
     Tri selon l'axe X  -->  O(n log n)
@@ -111,21 +114,17 @@ int main() {
         }
     }
 
-    
+    // FIN CHRONOMETRE //
+    clock_t fin = clock();
+    double ms = (double)(fin - debut) / CLOCKS_PER_SEC * 1000.0;
 
-    /*Affichage des resultats
-     */
-    printf("========================================\n");
+
+    //Affichage des resultatS//
     printf("  Resultat Detection de Collision UAV   \n");
-    printf("========================================\n");
     printf("  Drone #%-6d  et  Drone #%d\n", id1, id2);
     printf("  Distance minimale = %.4f m\n", min_dist);
-    printf("----------------------------------------\n");
     printf("  Temps d'execution : %.3f ms\n", ms);
-    printf("  Algorithme        : O(n log n)\n");
-   
-    /* Liberation memoire
-      ---------------------------------------------------------- */
+    // Liberation memoire//
     free(essaim);
     return 0;
 }
